@@ -8,6 +8,7 @@ const PopupMenu = imports.ui.popupMenu;
 const FileDialog = imports.misc.fileDialog;
 const GLib = imports.gi.GLib;
 const Gettext = imports.gettext;
+const Extension = imports.ui.extension;
 
 const FreedesktopDBusInterface = '\
 <node> \
@@ -198,6 +199,32 @@ function getBatteryIcon(charge, isCharging) {
     return iconName
 }
 
+function getDeviceIcon(type) {
+    let iconName
+
+    switch(type) {
+        case "desktop":
+            iconName = "computer-symbolic";
+            break;
+        case "laptop":
+            iconName = "laptop-symbolic";
+            break;
+        case "smartphone":
+            iconName = "smartphone-symbolic";
+            break;
+        case "tablet":
+            iconName = "tablet-symbolic";
+            break;
+        case "tv":
+            iconName = "tv-symbolic";
+            break;
+        default:
+            iconName = "dialog-question-symbolic";
+    }
+
+    return iconName
+}
+
 // l10n/translation support
 const UUID = "kdecapplet@joejoetv";
 Gettext.bindtextdomain(UUID, GLib.get_home_dir() + "/.local/share/locale");
@@ -344,7 +371,6 @@ KDEConnectApplet.prototype = {
 
                 let type = "";
                 let loadedPlugins = [];
-                let iconName = "";
 
                 try {
                     let bus = Gio.bus_get_sync(Gio.BusType.SESSION, null);
@@ -357,26 +383,7 @@ KDEConnectApplet.prototype = {
                     global.logError(error);
                 }
 
-                switch(type) {
-                    case "desktop":
-                        iconName = "computer-symbolic";
-                        break;
-                    case "laptop":
-                        iconName = "laptop-symbolic";
-                        break;
-                    case "smartphone":
-                        iconName = "smartphone-symbolic";
-                        break;
-                    case "tablet":
-                        iconName = "tablet-symbolic";
-                        break;
-                    case "tv":
-                        iconName = "tv-symbolic";
-                        break;
-                    default:
-                        iconName = "dialog-question-symbolic";
-                }
-                let deviceTypeIDMenuItem = new PopupMenu.PopupIconMenuItem(_("ID")+": "+id, iconName, St.IconType.SYMBOLIC, {})
+                let deviceTypeIDMenuItem = new PopupMenu.PopupIconMenuItem(_("ID")+": "+id, getDeviceIcon(type), St.IconType.SYMBOLIC, {})
                 deviceTypeIDMenuItem._signals.connect(deviceTypeIDMenuItem, 'activate', function() {
                     let clipboard = St.Clipboard.get_default();
                     clipboard.set_text(St.ClipboardType.CLIPBOARD, id);
@@ -609,8 +616,7 @@ KDEConnectApplet.prototype = {
     },
 
     reloadApplet: function() {
-        let reloadCMD = `dbus-send --session --dest=org.Cinnamon.LookingGlass --type=method_call /org/Cinnamon/LookingGlass org.Cinnamon.LookingGlass.ReloadExtension string:'${this.metadata.uuid}' string:'APPLET'`;
-        Util.spawnCommandLine(reloadCMD);
+        Extension.reloadExtension(this.metadata["uuid"], Extension.Type.APPLET);
     },
 
     checkZenity: function() {
