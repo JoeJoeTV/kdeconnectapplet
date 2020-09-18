@@ -309,7 +309,8 @@ KDEConnectApplet.prototype = {
     },
 
     on_applet_clicked: function() {
-		this.menu.toggle();
+        if (this.onlyOneDevice) this.menu.firstMenuItem.menu.open(false);
+        this.menu.toggle();
     },
 
     on_applet_removed_from_panel: function() {
@@ -344,6 +345,7 @@ KDEConnectApplet.prototype = {
         try {
             deviceIDs = this.kdecProxy.devicesSync(true, true)[0];
             deviceNames = this.kdecProxy.deviceNamesSync(true, true)[0];
+            this.onlyOneDevice = deviceIDs.length == 1;
         }
         catch (error) {
             global.logError(error);
