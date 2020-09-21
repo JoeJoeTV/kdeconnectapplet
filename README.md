@@ -1,4 +1,5 @@
 A Cinnamon Applet for interacting with KDE Connect.
+https://github.com/linuxmint/cinnamon-spices-applets/tree/master/kdecapplet@joejoetv
 
 ## Requirements
 KDE Connect needs to be installed.
@@ -14,4 +15,4 @@ The Applet will display all paired and reachable devices and a drop down menu fo
 This Applet is based on the KDE Connect Control Center Applet by [Severga](https://github.com/Severga).
 
 
-**If you find any bugs, please report them**
+**If you find any bugs, please report them [here](https://github.com/linuxmint/cinnamon-spices-applets/tree/master/kdecapplet@joejoetv)**
