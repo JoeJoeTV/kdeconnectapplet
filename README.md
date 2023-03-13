@@ -2,8 +2,8 @@ A Cinnamon Applet for interacting with the various functions provided by KDE Con
 
 ## **NOTE:**
 
-This repository might not always contain the most up-to-date source code, since changes are mainly done in the [Cinnamon Spices repository](https://github.com/linuxmint/cinnamon-spices-applets), where the past commits can also be found. I try to also push the changes made here, mostly after a version update.
-This repository also doesn't contain any additional translations done by other people, they can also be found in the [Cinnamon Spices repository](https://github.com/linuxmint/cinnamon-spices-applets)
+This repository might not always contain the most up-to-date source code, since changes are mainly done in the [Cinnamon Spices repository](https://github.com/linuxmint/cinnamon-spices-applets/tree/master/kdecapplet@joejoetv), where the past commits can also be found. I try to also push the changes made here, mostly after a version update.
+This repository also doesn't contain any additional translations done by other people, they can also be found in the [Cinnamon Spices repository](https://github.com/linuxmint/cinnamon-spices-applets/tree/master/kdecapplet@joejoetv)
 
 ## Requirements
 
